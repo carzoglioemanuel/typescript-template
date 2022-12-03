@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { createRepository } from "../controllers/repositories.controller";
+import {
+  createRepository,
+  uploadFiles,
+} from "../controllers/repositories.controller";
 
 const router = Router();
 
 router.post("/api/create-repository", createRepository);
+router.post("/api/upload-files", uploadFiles);
 
 export default router;
