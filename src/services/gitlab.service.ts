@@ -1,21 +1,16 @@
+import { AxiosRequestConfig } from "axios";
 import { apiCaller } from "../utils/apiCaller";
+import { config } from "../config";
 
-export function createRepository(options: {
-  url: any;
-  body: any;
-  headers: any;
-}) {
-  return "hola gitlab";
-  /* const options: AxiosRequestConfig = {
-    method: 'GET',
-    url: vehiclesUrl,
+export function createRepository(req: any) {
+  const options: AxiosRequestConfig = {
+    url: config.vendors.gitlab.url,
+    method: "POST",
+    data: req,
     headers: {
-      'Content-Type': 'application/json',
-      'User-Agent': userAgent,
-      'Auth-Token': this.config.access_token,
-      'Application-Id': this.applicationId,
+      "Content-Type": "application/json",
+      "PRIVATE-TOKEN": "xxxxx",
     },
-  }
-  
-  return apiCaller(options); */
+  };
+  return apiCaller(options);
 }
