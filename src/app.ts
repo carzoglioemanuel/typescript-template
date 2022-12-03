@@ -4,6 +4,9 @@ import * as bodyParser from "body-parser";
 import { AppDataSource } from "./database/dataSource";
 import { config } from "./config";
 import errorMiddleware from "./middlewares/error.middleware";
+import routes from "./routes";
+import repos from "./routes/repositories";
+import defs from "./utils/definitions";
 
 class App {
   public app: express.Application;
@@ -11,7 +14,10 @@ class App {
   constructor() {
     this.app = express();
 
+    this.app.use(express.json());
     this.connectToTheDatabase();
+    this.app.use(routes);
+    this.app.use(repos);
     this.initializeMiddlewares();
     this.initializeErrorHandling();
   }
@@ -36,7 +42,7 @@ class App {
 
   private async connectToTheDatabase() {
     try {
-      await AppDataSource.initialize();
+      if (defs.useDB === true) await AppDataSource.initialize();
     } catch (error) {
       console.error("Unable to connect to the database:", error);
     }

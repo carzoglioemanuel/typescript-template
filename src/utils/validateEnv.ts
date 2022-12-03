@@ -10,6 +10,8 @@ const validateEnv = () => {
     DB_PASSWORD: str(),
     DB_NAME: str(),
     DB_DIALECT: str(),
+    GITLAB_URL: str(),
+    GITHUB_URL: str(),
   });
 };
 
