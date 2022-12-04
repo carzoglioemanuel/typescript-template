@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { apiCaller } from "../utils/apiCaller";
 import { config } from "../config";
+const { spawn } = require("child_process");
 
 export function createRepository(req: any) {
   const options: AxiosRequestConfig = {
@@ -15,4 +16,12 @@ export function createRepository(req: any) {
     },
   };
   return apiCaller(options);
+}
+
+export function uploadFiles(req: any) {
+  console.log("req: ", req.content);
+  const command = spawn("git", ["status"]);
+  command.stdout.on("data", (output: any) => {
+    return output.toString();
+  });
 }
